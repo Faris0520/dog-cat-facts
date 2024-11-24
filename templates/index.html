@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog and Cat Facts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="flex-container">
+        <div class="container" id="dog-container">
+            <h2>Dog</h2>
+            <img id="dog-image" src="{{ dog_image }}" alt="Dog Image">
+            <p><strong>Fact: </strong><span id="dog-fact">{{dog_fact}}</span></p>
+            <button onclick="fetchDogData()">Get New Dog</button>
+        </div>
+        <div class="container" id="cat-container">
+            <h2>Cat</h2>
+            <img id="cat-image" src="{{ cat_image}}" alt="Cat Image">
+            <p><strong>Fact: </strong><span id="cat-fact">{{cat_fact}}</span></p>
+            <button onclick="fetchCatData()">Get New Cat</button>
+        </div>
+    </div>
+    <div class="teks2"><p><a href="https://github.com/faris0520">Faris0520</a></p></div>
+    <div class="teks"><p>UI may be not responsive</p></div>
+    <script>
+        function fetchDogData() {
+            fetch('https://dog.ceo/api/breeds/image/random')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('dog-image').src = data.message;
+                });
+
+            fetch('https://dogapi.dog/api/v2/facts')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('dog-fact').innerText = data.data[0].attributes.body;
+                })
+        }
+
+        function fetchCatData() {
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cat-image').src = data[0].url;
+                })
+
+            fetch('https://meowfacts.herokuapp.com')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cat-fact').innerText = data.data;
+                })
+        }
+    </script>
+</body>
+</html>
