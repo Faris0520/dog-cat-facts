@@ -1,4 +1,4 @@
-# dog-cat-facts
+# Dog and Cat Facts Website Using Python
 
 https://project-1-gamma-five.vercel.app/
 
